@@ -117,5 +117,7 @@ WHERE fabricante_id = 3 OR fabricante_id = 8;
 -- Monte uma consulta que traga nome, preco e quantidade de todos os produtos excetos da fabricante APPLE
 
 SELECT nome, preco, quantidade FROM produtos WHERE NOT fabricante_id = 3;
+
+SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8); -- Usando função lista
 ```
 
