@@ -121,3 +121,44 @@ SELECT nome, preco, quantidade FROM produtos WHERE NOT fabricante_id = 3;
 SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8); -- Usando função lista
 ```
 
+ ### Filtros 
+ ```sql
+ -- Para fazer busca de valores na tabela
+ SELECT nome, preco FROM produtos ORDER BY nome; -- Padrão do order by é ordem crescente ASC
+ SELECT nome, preco FROM produtos ORDER BY nome DESC; -- Ordem Descrecente
+ SELECT nome, descricao FROM produtos WHERE descricao LIKE '%processador%'; -- Like (COMO) e operador coringa % *Pesquisar sobre operador curinga
+
+ -- % Operador coringa (Significa QUALQUER TEXTO)
+ ```
+
+
+ ### Operações e Funções de agregação
+ ```sql
+ SELECT SUM(preco) FROM produtos; -- SOMA - Traz o resultado da soma de todos os textos
+ SELECT SUM(preco) AS TOTAL FROM produtos; -- ALIAS (APELIDO)
+
+ SELECT SUM(quantidade) AS "Quantidade em Estoque" FROM produtos; -- se for mais de uma palavra, é necessário aspas
+
+ *CTRL + SHIFT + ENTER PARA EXECUTAR DIRETO O COMANDO SQL* - Anotação aleatória
+
+ SELECT SUM(quantidade) AS "Quantidade em Estoque" FROM produtos WHERE fabricante_id = 3; -- APPLE
+
+ SELECT AVG(preco) AS "Média dos Preços" FROM produtos; -- AVG (AVERAGE) MÉDIA
+  SELECT ROUND(AVG(preco), 3) AS "Média dos Preços" FROM produtos; -- ROUND - para arredondar. Podemos também passar o parâmetro para identificar a quantidade de casas decimais
+
+-- COUNT (Contagem)
+ SELECT COUNT(id) AS "Quantidade de Produtos" FROM produtos; -- Conta quantas informações há de acordo com o parâmetro
+ SELECT COUNT(fabricante_id) AS "Quantidade de Fabricantes" FROM produtos;
+
+  SELECT COUNT(DISTINCT fabricante_id) AS "Quantidade de Fabricantes" FROM produtos; -- Comando DISTINCT identifica quais resultados se repetem e retorna somente os valores que não assumem repetição. Comando para evitar duplicidade de contagem de campos que não são chave-primária
+ ```
+
+
+
+
+ -- anotação aleatória de código de inserção que fora feita manualmente no php admin
+
+ INSERT INTO `produtos` (`id`, `nome`, `descricao`, `preco`, `quantidade`, `fabricante_id`) VALUES (NULL, 'Teclado Gamer ', 'Teclado de última geração com teclas quânticas e mecânicas ótimo tempo de resposta e led embutido.', '380', '8', '8'), (NULL, 'Placa mãe ', 'Placa com diversos slots de memória RAM DDR6, suporte a processadores modernos Intel linha CORE i5 e i7 e também AMD.', '1200', '5', '1') 
+ --
+
+
