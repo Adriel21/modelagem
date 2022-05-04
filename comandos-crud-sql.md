@@ -118,7 +118,7 @@ WHERE fabricante_id = 3 OR fabricante_id = 8;
 
 SELECT nome, preco, quantidade FROM produtos WHERE NOT fabricante_id = 3;
 
-SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8); -- Usando função lista
+SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8, 1); -- Usando função lista
 ```
 
  ### Filtros 
@@ -151,6 +151,8 @@ SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8); -- Usando funçã
  SELECT COUNT(fabricante_id) AS "Quantidade de Fabricantes" FROM produtos;
 
   SELECT COUNT(DISTINCT fabricante_id) AS "Quantidade de Fabricantes" FROM produtos; -- Comando DISTINCT identifica quais resultados se repetem e retorna somente os valores que não assumem repetição. Comando para evitar duplicidade de contagem de campos que não são chave-primária
+
+  SELECT nome, preco, quantidade, (preco*quantidade) AS Total FROM produtos; -- Multiplicando preços dos produtos pela quantidade
  ```
 
 
@@ -159,6 +161,32 @@ SELECT nome, preco FROM produtos WHERE fabricante_id IN(3, 8); -- Usando funçã
  -- anotação aleatória de código de inserção que fora feita manualmente no php admin
 
  INSERT INTO `produtos` (`id`, `nome`, `descricao`, `preco`, `quantidade`, `fabricante_id`) VALUES (NULL, 'Teclado Gamer ', 'Teclado de última geração com teclas quânticas e mecânicas ótimo tempo de resposta e led embutido.', '380', '8', '8'), (NULL, 'Placa mãe ', 'Placa com diversos slots de memória RAM DDR6, suporte a processadores modernos Intel linha CORE i5 e i7 e também AMD.', '1200', '5', '1') 
- --
+ ---
+
+ 
+
+ 
+ ### Agrupamentos
+ ```sql
+ SELECT fabricante_id, SUM(preco) AS Total FROM produtos GROUP BY fabricante_id; -- o comando GROUP BY permute segmentar resultados da consulta. Neste caso, somamos os preços e segmentamos/agrupamos por cada fabricante.
+ ```
+
+ ## UPDATE
+
+ ### Atualizar dados de uma tabela
+ ```sql
+ UPDATE fabricantes SET nome = 'Microsoft Brasil' WHERE id = 8; 
+
+ -- Mudar o preço do Ultrabook da positivo para 5200.
+UPDATE produtos SET preco = 5200 WHERE id = 7;
+ -- Mudar a quantidade dos produtos da Asus e da APPLE para 15
+UPDATE produtos SET quantidade = 15 WHERE fabricante_id = 1 OR fabricante_id = 3;
+ ```
 
 
+### Excluir dados de uma tabela 
+```sql
+DELETE FROM fabricantes WHERE id = 4; -- LG
+
+DELETE FROM produtos WHERE preco < 2000 AND preco > 500;
+```
