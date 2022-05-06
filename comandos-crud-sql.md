@@ -190,3 +190,37 @@ DELETE FROM fabricantes WHERE id = 4; -- LG
 
 DELETE FROM produtos WHERE preco < 2000 AND preco > 500;
 ```
+
+### Consultas em duas ou mais tabelas (JUNÇÃO)
+```sql
+-- nomeDatabela.nomeDacoluna
+SELECT produtos.nome, fabricantes.nome 
+
+FROM produtos INNER JOIN fabricantes
+-- INNER JOIN é o comando que permite JUNTAR tabelas para uma consulta
+
+-- ON comando para indicar o critério da JUNÇÃO
+ ON produtos.fabricante_id = fabricantes.id;
+```
+
+```sql
+SELECT produtos.nome, fabricantes.nome FROM produtos INNER JOIN fabricantes ON produtos.fabricante_id = fabricantes.id;
+
+-- Nome do produto e do fabricante, ordenados pelo nome do produto
+SELECT produtos.nome AS Produto, fabricantes.nome AS Fabricante FROM produtos INNER JOIN fabricantes ON produtos.fabricante_id = fabricantes.id
+ORDER BY produtos.nome;
+
+-- Fabricante, soma dos preços e quantidade de produtos
+SELECT fabricantes.nome AS Fabricante, SUM(produtos.preco) AS Total, COUNT(produtos.fabricante_id) AS  "Qtd de Produtos" FROM produtos INNER JOIN fabricantes ON produtos.fabricante_id = fabricantes.id GROUP BY Fabricante ORDER BY Total;
+
+-- Trazer a quantidade de produtos de cada fabricante
+
+SELECT fabricantes.nome AS Fabricante, COUNT(produtos.id) AS Quantidade  FROM produtos INNER JOIN fabricantes ON produtos.fabricante_id = fabricantes.id GROUP BY fabricantes.nome;
+-- Group by segmenta e detalha mais o resultado
+```
+```sql
+-- INNER JOIN traz somente os fabricantes que possuem produtos, os que não possuem são descartados
+-- RIGHT/LEFT JOIN traz os registros mesmo daqueles fabricantes que não tem produtos. Right traz a tabela a direita e Left traz a tabela a esquerda.
+SELECT fabricantes.nome AS Fabricante, COUNT(produtos.id) AS Quantidade  FROM produtos RIGHT JOIN fabricantes ON produtos.fabricante_id = fabricantes.id GROUP BY fabricantes.nome;
+```
+
