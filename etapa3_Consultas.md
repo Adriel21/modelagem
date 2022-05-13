@@ -29,6 +29,31 @@ SELECT alunos.nome, cursos.titulo, professores.nome FROM alunos INNER JOIN curso
 -- 9) Consulta que mostra quantidade de alunos que cada curso possui, classificando o resultado em ordem descrescente
 SELECT COUNT(alunos.cursos_id) AS 'Qtd. de alunos por cursos', cursos.titulo AS Curso FROM alunos INNER JOIN cursos ON alunos.cursos_id = cursos.id GROUP BY cursos.titulo ORDER BY COUNT(alunos.cursos_id)DESC;
 
-SELECT nome, primeira_nota, segunda_nota (primeira_nota+segunda_nota)/2 AS Media, cursos.titulo FROM alunos INNER JOIN cursos ON alunos.cursos_id = cursos.id WHERE alunos.cursos_id = 12 OR alunos.cursos_id = 11 ORDER BY nome;
+-- 10) Faça consulta que mostre dos alunos, suas notas médias, e o título dos cursos que fazem. Considerando os alunos front e back end, classificando pelo nome do aluno
+SELECT nome, primeira_nota, segunda_nota, ROUND((primeira_nota+segunda_nota)/2) AS Media, cursos.titulo FROM alunos INNER JOIN cursos ON alunos.cursos_id = cursos.id WHERE alunos.cursos_id = 12 OR alunos.cursos_id = 11 ORDER BY nome;
+
+-- 11) Alterado o Figma para adobe xd
+UPDATE cursos SET titulo = 'Adobe XD' WHERE titulo = 'Figma';
+-- Alterando a carga horária de 10h à 15h
+UPDATE cursos SET cargaHoraria = 15 WHERE cargaHoraria = 10;
+
+-- 12) DELETE de um aluno do curso de UX e de REDES de computadores.
+DELETE FROM alunos WHERE cursos_id = 13 AND nome = 'Leonardo'; 
+DELETE FROM alunos WHERE cursos_id = 15;
+
+-- 13) Consulta que mostre a lista de alunos atualizada e o título dos cursos que fazem, classificados pelo nome do aluno
+SELECT alunos.nome AS Alunos, cursos.titulo AS Cursos FROM alunos INNER JOIN cursos ON alunos.cursos_id = cursos.id ORDER BY alunos.nome;
+
+
+--  Desafio 1) Consulta que calcula a idade do aluno
+SELECT nome AS Nome, TIMESTAMPDIFF(YEAR, nascimento, curdate()) AS Idade FROM alunos;
+
+-- Desafio 2) Consulta que mostra média de cada aluno quando for maior que 7
+SELECT nome, primeira_nota, segunda_nota, (primeira_nota+segunda_nota)/2 AS Média FROM alunos WHERE (primeira_nota+segunda_nota)/2 >= 7;
+
+-- Desafio 3) Média menor que 7
+SELECT nome, primeira_nota, segunda_nota, (primeira_nota+segunda_nota)/2 AS Média FROM alunos WHERE (primeira_nota+segunda_nota)/2 < 7;
+
+SELECT COUNT((primeira_nota+segunda_nota)/2) AS 'Qtd de alunos com média acima ou igual à 7' FROM alunos WHERE (primeira_nota+segunda_nota)/2 >= 7;
 ```
 
