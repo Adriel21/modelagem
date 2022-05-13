@@ -54,6 +54,7 @@ SELECT nome, primeira_nota, segunda_nota, (primeira_nota+segunda_nota)/2 AS Méd
 -- Desafio 3) Média menor que 7
 SELECT nome, primeira_nota, segunda_nota, (primeira_nota+segunda_nota)/2 AS Média FROM alunos WHERE (primeira_nota+segunda_nota)/2 < 7;
 
+-- Desafio 4
 SELECT COUNT((primeira_nota+segunda_nota)/2) AS 'Qtd de alunos com média acima ou igual à 7' FROM alunos WHERE (primeira_nota+segunda_nota)/2 >= 7;
 ```
 
